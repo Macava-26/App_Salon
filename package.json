@@ -12,9 +12,10 @@
   "devDependencies": {
     "glob": "^10.3.12",
     "gulp": "^5.0.1",
-    "gulp-sass": "^5.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^6.0.1",
     "gulp-terser": "^2.1.0",
-    "sass": "^1.75.0",
+    "sass": "^1.93.2",
     "sharp": "^0.33.3"
   }
 }
