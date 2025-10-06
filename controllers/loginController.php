@@ -3,6 +3,7 @@
 
 namespace Controllers;
 
+use Model\Usuario;
 use MVC\Router;
 
 class loginController
@@ -17,16 +18,25 @@ class loginController
     {
         echo 'Desde logout';
     }
-    public static function olvide()
+    public static function restablecer(Router $router)
     {
-        echo 'Desde olvide';
+            $router->render('auth/restablecer-password', [
+                
+            ]);
     }
     public static function recuperar()
     {
         echo 'Desde recuperar';
     }
-    public static function crear()
+    public static function crear(Router $router)
     {
-        echo 'Desde crear';
+            $usuario = new Usuario;    
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+        }
+            $router->render('auth/crear-cuenta', [ 'usuario' => $usuario
+
+            ]);
     }
 }

@@ -15,8 +15,8 @@ $router->post('/', [loginController::class, 'login']);
 $router->get('/logout', [loginController::class, 'logout']);
 
 //Recuperar Password
-$router->get('/olvide', [loginController::class, 'olvide']);
-$router->post('/olvide', [loginController::class, 'olvide']);
+$router->get('/restablecer', [loginController::class, 'restablecer']);
+$router->post('/restablecer', [loginController::class, 'restablecer']);
 $router->get('/recuperar', [loginController::class, 'recuperar']);
 $router->post('/recuperar', [loginController::class, 'recuperar']);
 
