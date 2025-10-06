@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'variables' as v;
 
 /** Media Queries **/
@@ -38,8 +39,8 @@
     @include tablet {
         width: auto;
     }
-    &:hover {
-        background-color: darken( $bgColor, 10% );
+    &:hover { 
+        background-color: color.adjust($bgColor, $lightness: -10% );
         cursor: pointer;
     }
 }
