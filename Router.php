@@ -24,7 +24,9 @@ class Router
         session_start();
 
         // Arreglo de rutas protegidas...
-        // $rutas_protegidas = ['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
+        // $rutas_protegidas = ['/admin', '/propiedades/crear', 
+        // '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', 
+        // '/vendedores/actualizar', '/vendedores/eliminar'];
 
         // $auth = $_SESSION['login'] ?? null;
 
