@@ -38,8 +38,8 @@ class Usuario extends ActiveRecord
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->telefono = $args['telefono'] ?? '';
-        $this->admin = $args['admin'] ?? null;
-        $this->confirmado = $args['confirmado'] ?? null;
+        $this->admin = $args['admin'] ?? '0';
+        $this->confirmado = $args['confirmado'] ?? '0';
         $this->token = $args['token'] ?? '';
     }
 
@@ -70,20 +70,66 @@ class Usuario extends ActiveRecord
     }
 
 
+    public function validarLogin()
+    {
+        if (!$this->email) {
+            self::$alertas['error'][] = "El email es Obligatorio";
+        }
+        if (!$this->password) {
+            self::$alertas['error'][] = "El password es Obligatorio";
+        }
+        return self::$alertas;
+    }
+
+
+    public function validarEmail()
+    {
+        if (!$this->email) {
+            self::$alertas['error'][] = "El email es Obligatorio";
+        }
+        return self::$alertas;
+    }
+
+
+    public function validarPassword(){
+        if(!$this->password){
+            self::$alertas ['error'][] = 'El Password es Obligatorio';
+        }
+        if(strlen($this->password)< 6) {
+            self::$alertas['error'][] = 'El password debe tener al menos 6 Caracteres';
+        }
+    
+        return self::$alertas;
+    }
+
+
     public function existeUsuario()
     {
         $query = "SELECT * FROM " . SELF::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
 
         $resultado = self::$db->query($query);
 
-        if($resultado->num_rows){
+        if ($resultado->num_rows) {
             self::$alertas['error'][] = 'El usuario ya esta registrado';
         }
 
         return $resultado;
     }
 
-    public function hashPassword(){
+    public function hashPassword()
+    {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
+    public function VerificarPassword($password)
+    {
+
+        $resultado = password_verify($password, $this->password);
+
+        if (!$resultado || !$this->confirmado) {
+            self::$alertas['error'][] = 'Password Incorrecto o Cuenta sin confirmar';
+        } else {
+            return true;
+        }
     }
 }
