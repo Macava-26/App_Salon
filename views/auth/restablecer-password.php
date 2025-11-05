@@ -2,6 +2,9 @@
 <p class="descripcion-pagina"> Introduzca la dirección de correo electrónico
     para Recuperar su Contraseña</p>
 
+<?php
+include_once __DIR__ . "/../templates/alertas.php";
+?>
 
 <form class="formulario" method="POST" action="/restablecer">
     <div class="campo">
