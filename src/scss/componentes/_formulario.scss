@@ -22,5 +22,15 @@
         border: none;
         padding: calc(v.$separacion / 4);
         border-radius: 1rem;
+
+        &:disabled{
+            color: v.$blanco;
+            font-weight: bold;
+            background-color: color.adjust(v.$negro, $lightness: 30% );
+            cursor: not-allowed;
+
+            
+
+        }
     }
 }

@@ -405,6 +405,61 @@ p {
   padding: 3rem;
 }
 
+.seccion {
+  padding: 5rem 0;
+  display: none;
+}
+.seccion .text-center {
+  text-align: center;
+}
+
+.mostrar {
+  display: block;
+}
+
+.ocultar {
+  display: none;
+}
+
+.listado-servicios {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .listado-servicios {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.listado-servicios .servicios {
+  background-color: #FFFFFF;
+  padding: 3rem;
+  border-radius: 1rem;
+  transition-property: transform;
+  transition-duration: 300ms;
+  text-align: center;
+}
+.listado-servicios .servicios.seleccionado {
+  background-color: #0da6f3;
+}
+.listado-servicios .servicios.seleccionado p {
+  color: #FFFFFF;
+}
+.listado-servicios .servicios:hover {
+  transform: scale(1.1);
+}
+.listado-servicios .servicios p {
+  color: #1a1b15;
+  margin: 0 0 1.25rem 0;
+}
+.listado-servicios .servicios .precio-servicio {
+  color: #0da6f3;
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 0;
+}
+
 .formulario {
   width: 100%;
   margin-top: 5rem;
@@ -423,6 +478,12 @@ p {
   border: none;
   padding: 1.25rem;
   border-radius: 1rem;
+}
+.campo input:disabled {
+  color: #FFFFFF;
+  font-weight: bold;
+  background-color: rgb(108.875, 113.0625, 87.9375);
+  cursor: not-allowed;
 }
 
 .boton {
@@ -482,4 +543,47 @@ p {
 }
 .alerta.exito {
   background-color: #329f00;
+}
+
+@media (min-width: 768px) {
+  .tabs {
+    display: flex;
+  }
+}
+.tabs button {
+  background-color: #0da6f3;
+  border: none;
+  color: #FFFFFF;
+  padding: 1rem;
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: background-color 300ms ease;
+}
+.tabs button:hover {
+  cursor: pointer;
+  background-color: rgb(9.6850393701, 133.1692913386, 195.3149606299);
+}
+.tabs button.actual {
+  background-color: #FFFFFF;
+  color: #0da6f3;
+}
+
+.paginacion {
+  padding: 5rem 0;
+}
+@media (min-width: 480px) {
+  .paginacion {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.paginacion button {
+  margin: 0.5rem;
+}
+
+.ocultar {
+  visibility: hidden;
 }/*# sourceMappingURL=app.css.map */
