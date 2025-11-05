@@ -86,7 +86,7 @@ class ActiveRecord
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach ($atributos as $key => $value) {
-            $sanitizado[$key] = self::$db->escape_string($value);
+            $sanitizado[$key] = is_null($value) ? null : self::$db->escape_string($value);
         }
         return $sanitizado;
     }
@@ -131,6 +131,14 @@ class ActiveRecord
         return array_shift($resultado);
     }
 
+    public static function where($columna, $valor)
+    {
+        $valor = trim($valor); // Eliminar espacios al inicio y final
+        $query = "SELECT * FROM " . static::$tabla  . " WHERE TRIM({$columna}) = '{$valor}'";
+        $resultado = self::consultarSQL($query);
+        return array_shift($resultado);
+    }
+
     // Obtener Registros con cierta cantidad
     public static function get($limite)
     {
@@ -148,7 +156,7 @@ class ActiveRecord
         // Insertar en la base de datos
         $query = " INSERT INTO " . static::$tabla . " ( ";
         $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES (' ";
+        $query .= " ) VALUES ('";
         $query .= join("', '", array_values($atributos));
         $query .= " ') ";
 
@@ -189,7 +197,7 @@ class ActiveRecord
         $query = "DELETE FROM "  . static::$tabla .
             " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
         $resultado = self::$db->query($query);
-        
+
         return $resultado;
     }
 
