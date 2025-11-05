@@ -195,12 +195,12 @@ function seleccionarFecha() {
 
 function seleccionarHora() {
     const inputHora = document.querySelector('#hora');
-    inputHora.addEventListener('input', function(e) {
+    inputHora.addEventListener('input', function (e) {
         const horaCita = e.target.value;
-        const hora =horaCita.split(":");
-        if(hora < '09:00' || hora > '20:00') {
+        const hora = horaCita.split(":");
+        if (hora < '09:00' || hora > '20:00') {
             e.target.value = '';
-        mostrarAlerta('Nuestro horario es de 10 am a 9 pm', 'error','.formulario');
+            mostrarAlerta('Nuestro horario es de 10 am a 9 pm', 'error', '.formulario');
         } else {
             cita.hora = e.target.value;
 
@@ -212,18 +212,63 @@ function seleccionarHora() {
 function mostrarResumen() {
     const resumen = document.querySelector(".contenido-resumen");
 
-    if(Object.values(cita).includes('') || cita.servicios.length === 0) {
-        mostrarAlerta('Asegurate que todos los campos o servicios esten correctos','error', '.contenido-resumen');
-    } else {
-        console.log('Todo bien');
+
+    while (resumen.firstChild) {
+        resumen.removeChild(resumen.firstChild);
     }
+
+
+
+    if (Object.values(cita).includes('') || cita.servicios.length === 0) {
+        mostrarAlerta('Asegurate que todos los campos o servicios esten correctos', 'error', '.contenido-resumen');
+
+        return;
+    }
+
+    //Formatea DIV de resumen
+
+    const { nombre, fecha, hora, servicios } = cita;
+
+    const nombreCliente = document.createElement('P');
+    nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`;
+
+    const fechaCita = document.createElement('P');
+    fechaCita.innerHTML = `<span>Fecha:</span> ${fecha}`;
+
+    const horaCita = document.createElement('P');
+    horaCita.innerHTML = `<span>Hora:</span> ${hora}`;
+
+    servicios.forEach(servicio => {
+        const { id, precio, nombre } = servicio;
+
+        const contenedorServicio = document.createElement('DIV');
+        contenedorServicio.classList.add('contenedor-servicio');
+
+        const textoServicio = document.createElement('P');
+        textoServicio.textContent = nombre;
+
+        const precioServicio = document.createElement('P');
+        precioServicio.innerHTML = `<span>Precio:</span> $${precio}`;
+
+        contenedorServicio.appendChild(textoServicio);
+        contenedorServicio.appendChild(precioServicio);
+
+        resumen.appendChild(contenedorServicio);
+
+
+    })
+
+    resumen.appendChild(nombreCliente);
+    resumen.appendChild(fechaCita);
+    resumen.appendChild(horaCita);
 }
 
 function mostrarAlerta(mensaje, tipo, elemento) {
     //Preveer el duplicado de la alerta
     const alertaPrevia = document.querySelector('.alerta');
-    if (alertaPrevia) return;
-
+    if (alertaPrevia) {
+        alertaPrevia.remove();
+    }
     //Scriptin de alerta
     const alerta = document.createElement('DIV');
     alerta.textContent = mensaje;
@@ -236,6 +281,6 @@ function mostrarAlerta(mensaje, tipo, elemento) {
     //Eliminar alerta
     setTimeout(() => {
         alerta.remove();
-    }, 3000);
+    }, 5000);
 }
 
