@@ -35,10 +35,6 @@ class loginController
                         $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;
                         $_SESSION['email'] = $usuario->email;
                         $_SESSION['login'] = true;
-
-
-                        //redireccionar
-
                     }
                     if ($usuario->admin === "1") {
                         $_SESSION['admin'] = $usuario->admin ?? null;
@@ -62,7 +58,11 @@ class loginController
 
     public static function logout()
     {
-        echo 'Desde logout';
+        session_start();
+
+        $_SESSION = [];
+
+        header('Location: /');
     }
     public static function restablecer(Router $router)
     {
