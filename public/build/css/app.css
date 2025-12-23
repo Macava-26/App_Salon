@@ -316,19 +316,25 @@ html {
 
 body {
   min-height: 100%;
+}
+@media (min-width: 768px) {
+  body {
+    height: 100%;
+  }
+}
+body {
   display: flex;
   flex-direction: column;
   background-color: #1a1b15;
   color: #FFFFFF;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-body {
   font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 .contenedor {
@@ -404,6 +410,64 @@ p {
   margin: 0 auto;
   padding: 3rem;
 }
+@media (min-width: 768px) {
+  .contenedor-app .app {
+    overflow: scroll;
+  }
+}
+
+.barra {
+  margin: 5rem 0;
+}
+@media (min-width: 768px) {
+  .barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.barra .boton {
+  background-color: #1a1b15;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: 400;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 5rem 0;
+}
+@media (min-width: 768px) {
+  .barra .boton {
+    width: auto;
+  }
+}
+.barra .boton:hover {
+  background-color: hsl(70, 12.5%, -0.5882352941%);
+  cursor: pointer;
+}
+.barra .boton {
+  margin: 0;
+}
+
+.barra-servicios {
+  margin-bottom: 5rem;
+}
+@media (min-width: 768px) {
+  .barra-servicios {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.barra-servicios .boton {
+  margin: 0 0 1rem 0;
+}
 
 .seccion {
   padding: 5rem 0;
@@ -478,6 +542,33 @@ p {
   margin-bottom: 5rem;
 }
 
+.citas, .servicios {
+  list-style: none;
+  padding: 0;
+}
+.citas li, .servicios li {
+  padding: 1rem;
+  border-top: 1px solid #FFFFFF;
+}
+.citas li p, .servicios li p {
+  font-weight: 700;
+  color: #0da6f3;
+}
+.citas li span, .servicios li span,
+.citas li .servicio,
+.servicios li .servicio {
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+.servicios .acciones {
+  margin: 0;
+}
+.servicios .boton,
+.servicios .boton-eliminar {
+  margin: 0;
+}
+
 .formulario {
   width: 100%;
   margin-top: 5rem;
@@ -531,6 +622,33 @@ p {
   cursor: pointer;
 }
 
+.boton-eliminar {
+  background-color: #cb0000;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: 400;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 5rem 0;
+}
+@media (min-width: 768px) {
+  .boton-eliminar {
+    width: auto;
+  }
+}
+.boton-eliminar:hover {
+  background-color: #980000;
+  cursor: pointer;
+}
+
 .acciones {
   margin-top: 5rem;
 }
@@ -538,6 +656,7 @@ p {
   .acciones {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 }
 .acciones a {
@@ -561,6 +680,16 @@ p {
 }
 .alerta.exito {
   background-color: #329f00;
+}
+
+.no-citas {
+  text-align: center;
+  text-transform: uppercase;
+  color: #0da6f3;
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
 @media (min-width: 768px) {
