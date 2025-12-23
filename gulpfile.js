@@ -21,7 +21,7 @@ export function css(done) {
         .pipe(sass({
             outputStyle: 'compressed'
         }).on('error', sass.logError))
-        .pipe(dest('./public/build/css', { sourcemaps: '.' }));
+        .pipe(dest('./public/dist/css', { sourcemaps: '.' }));
     done();
 }
 
@@ -29,18 +29,18 @@ export function js(done) {
     src(paths.js)
         .pipe(plumber()) // Usa plumber para manejar errores sin detener Gulp
         .pipe(terser())
-        .pipe(dest('./public/build/js'));
+        .pipe(dest('./public/dist/js'));
     done();
 }
 
 export async function imagenes(done) {
     const srcDir = './src/img';
-    const buildDir = './public/build/img';
+    const distDir = './public/dist/img';
     const images = await glob('./src/img/**/*');
 
     images.forEach(file => {
         const relativePath = path.relative(srcDir, path.dirname(file));
-        const outputSubDir = path.join(buildDir, relativePath);
+        const outputSubDir = path.join(distDir, relativePath);
         procesarImagenes(file, outputSubDir);
     });
     done();
