@@ -139,6 +139,14 @@ class ActiveRecord
         return array_shift($resultado);
     }
 
+    //Consulta Plana de SQL(utilizar cuando los metodos del modelo no son suficientes)
+    public static function SQL($consulta)
+    {
+        $query = $consulta;
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     // Obtener Registros con cierta cantidad
     public static function get($limite)
     {
@@ -156,9 +164,12 @@ class ActiveRecord
         // Insertar en la base de datos
         $query = " INSERT INTO " . static::$tabla . " ( ";
         $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES ('";
-        $query .= join("', '", array_values($atributos));
-        $query .= " ') ";
+        $query .= " ) VALUES (";
+        $valores = array_map(function($value) {
+            return $value === null ? 'NULL' : "'" . self::$db->escape_string($value) . "'";
+        }, array_values($atributos));
+        $query .= join(", ", $valores);
+        $query .= ") ";
 
         // return json_encode(['query'=> $query]);
 
@@ -179,7 +190,7 @@ class ActiveRecord
         // Iterar para ir agregando cada campo de la BD
         $valores = [];
         foreach ($atributos as $key => $value) {
-            $valores[] = "{$key}='{$value}'";
+            $valores[] = "{$key}=" . ($value === null ? 'NULL' : "'" . self::$db->escape_string($value) . "'");
         }
 
         // Consulta SQL

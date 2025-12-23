@@ -1,5 +1,8 @@
 <h1 class="nombre-pagina"><strong>Agendar Cita</strong></h1>
 
+<?php
+    include_once __DIR__ . '/../templates/barra.php';
+?>
 
 <div id="app">
     <nav class="tabs">
@@ -40,6 +43,7 @@
                     min="09:50"
                     max="21:00">
             </div>
+            <input type="hidden" id='id' value="<?php echo $id; ?>">
         </form>
     </div>
     <div id="paso-3" class="seccion contenido-resumen">
@@ -64,6 +68,7 @@
         // Apuntar al archivo compilado que está dentro de la carpeta pública (public/build/js/app.js)
         // Usar barras '/' para rutas web y ruta absoluta desde la raíz pública
         $script = "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
         <script src='/build/js/app.js'></script>
         ";
     ?>
